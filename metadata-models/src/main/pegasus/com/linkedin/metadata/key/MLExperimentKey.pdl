@@ -1,0 +1,38 @@
+namespace com.linkedin.metadata.key
+
+import com.linkedin.common.Urn
+import com.linkedin.common.FabricType
+
+/**
+ * Key for an ML experiment
+ */
+@Aspect = {
+  "name": "mlExperimentKey"
+}
+record MLExperimentKey {
+  /**
+  * Standardized platform urn for the model
+  */
+  platform: Urn
+
+  /**
+  * Name of the MLExperiment
+  */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL",
+    "enableAutocomplete": true,
+    "boostScore": 10.0
+  }
+  name: string
+
+  /**
+  * Fabric type where experiment belongs to or where it was generated
+  */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL",
+    "addToFilters": true,
+    "filterNameOverride": "Environment",
+    "queryByDefault": false
+  }
+  origin: FabricType
+}
