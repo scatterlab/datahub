@@ -70,6 +70,11 @@ type Query {
     mlModel(urn: String!): MLModel
 
     """
+    Incubating: Fetch an ML Model by primary key (urn)
+    """
+    mlExperiment(urn: String!): MLExperiment
+
+    """
     Incubating: Fetch an ML Model Group by primary key (urn)
     """
     mlModelGroup(urn: String!): MLModelGroup
@@ -324,6 +329,11 @@ enum EntityType {
     The ML Feature Entity
     """
     MLFEATURE
+
+    """
+    The ML ExperimentEntity
+    """
+    MLEXPERIMENT
 
     """
     The ML Primary Key Entity
@@ -4431,6 +4441,127 @@ type MLModel implements EntityWithRelationships & Entity {
 }
 
 """
+An ML Experiment Metadata Entity Note that this entity is incubating
+"""
+type MLExperiment implements EntityWithRelationships & Entity {
+    """
+    The primary key of the ML model
+    """
+    urn: String!
+
+    """
+    A standard Entity Type
+    """
+    type: EntityType!
+
+    """
+    ML model display name
+    """
+    name: String!
+
+    """
+    Standardized platform urn where the MLExperiment is defined
+    """
+    platform: DataPlatform!
+
+    """
+    Fabric type where mlexperiment belongs to or where it was generated
+    """
+    origin: FabricType!
+
+    """
+    Human readable description for mlexperiment
+    """
+    description: String
+
+    """
+    Deprecated, use tags field instead
+    The standard tags for the ML Model
+    """
+    globalTags: GlobalTags @deprecated
+
+    """
+    The standard tags for the ML Model
+    """
+    tags: GlobalTags
+
+    """
+    Ownership metadata of the mlexperiment
+    """
+    ownership: Ownership
+
+    """
+    Additional read only information about the ML Model
+    """
+    properties: MLExperimentProperties
+
+    """
+    Intended use of the mlmodel
+    """
+    intendedUse: IntendedUse
+
+    """
+    Metrics metadata of the mlmodel
+    """
+    metrics: Metrics
+
+    """
+    Evaluation Data of the mlmodel
+    """
+    evaluationData: [BaseData!]
+
+    """
+    Training Data of the mlmodel
+    """
+    trainingData: [BaseData!]
+
+    """
+    Quantitative Analyses of the mlmodel
+    """
+    quantitativeAnalyses: QuantitativeAnalyses
+
+    """
+    Ethical Considerations of the mlmodel
+    """
+    ethicalConsiderations: EthicalConsiderations
+
+    """
+    Caveats and Recommendations of the mlmodel
+    """
+    caveatsAndRecommendations: CaveatsAndRecommendations
+
+    """
+    References to internal resources related to the mlmodel
+    """
+    institutionalMemory: InstitutionalMemory
+
+    """
+    Source Code
+    """
+    sourceCode: SourceCode
+
+    """
+    Status metadata of the mlmodel
+    """
+    status: Status
+
+    """
+    Cost Aspect of the mlmodel
+    """
+    cost: Cost
+
+    """
+    Deprecation
+    """
+    deprecation: Deprecation
+
+    """
+    Edges extending from this entity
+    """
+    relationships(input: RelationshipsInput!): EntityRelationshipsResult
+}
+
+"""
 An ML Model Group Metadata Entity
 Note that this entity is incubating
 """
@@ -4600,6 +4731,31 @@ type MLModelProperties {
     hyperParams:  [MLHyperParam]
 
     trainingMetrics: [MLMetric]
+
+    mlFeatures: [String!]
+
+    tags: [String!]
+
+    groups: [MLModelGroup]
+
+    customProperties: [StringMapEntry!]
+}
+
+type MLExperimentProperties {
+
+    description: String
+
+    date: Long
+
+    version: String
+
+    type: String
+
+    hyperParameters: HyperParameterMap
+
+    hyperParams:  [MLHyperParam]
+
+    metrics: [MLMetric]
 
     mlFeatures: [String!]
 

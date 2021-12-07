@@ -37,6 +37,7 @@ import com.linkedin.metadata.key.GlossaryTermKey
 import com.linkedin.metadata.key.MLFeatureKey
 import com.linkedin.ml.metadata.MLFeatureProperties
 import com.linkedin.metadata.key.MLModelKey
+import com.linkedin.metadata.key.MLExperimentKey
 import com.linkedin.ml.metadata.CaveatsAndRecommendations
 import com.linkedin.ml.metadata.EthicalConsiderations
 import com.linkedin.ml.metadata.EvaluationData
@@ -44,6 +45,7 @@ import com.linkedin.ml.metadata.IntendedUse
 import com.linkedin.ml.metadata.Metrics
 import com.linkedin.ml.metadata.MLModelFactorPrompts
 import com.linkedin.ml.metadata.MLModelProperties
+import com.linkedin.ml.metadata.MLExperimentProperties
 import com.linkedin.ml.metadata.QuantitativeAnalyses
 import com.linkedin.ml.metadata.TrainingData
 import com.linkedin.ml.metadata.SourceCode
@@ -84,6 +86,7 @@ typeref Aspect = union[
   MLFeatureKey,
   MLFeatureProperties,
   MLModelKey,
+  MLExperimentKey,
   CaveatsAndRecommendations,
   EthicalConsiderations,
   EvaluationData,
@@ -91,6 +94,7 @@ typeref Aspect = union[
   Metrics,
   MLModelFactorPrompts,
   MLModelProperties,
+  MLExperimentProperties,
   QuantitativeAnalyses,
   TrainingData,
   SourceCode,

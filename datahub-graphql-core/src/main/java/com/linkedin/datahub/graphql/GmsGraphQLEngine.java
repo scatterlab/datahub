@@ -20,6 +20,7 @@ import com.linkedin.datahub.graphql.generated.EntityRelationship;
 import com.linkedin.datahub.graphql.generated.EntityRelationshipLegacy;
 import com.linkedin.datahub.graphql.generated.ForeignKeyConstraint;
 import com.linkedin.datahub.graphql.generated.MLModelProperties;
+import com.linkedin.datahub.graphql.generated.MLExperimentProperties;
 import com.linkedin.datahub.graphql.generated.RecommendationContent;
 import com.linkedin.datahub.graphql.generated.SearchResult;
 import com.linkedin.datahub.graphql.generated.InstitutionalMemoryMetadata;
@@ -30,6 +31,7 @@ import com.linkedin.datahub.graphql.generated.CorpUserInfo;
 import com.linkedin.datahub.graphql.generated.CorpGroupInfo;
 import com.linkedin.datahub.graphql.generated.Owner;
 import com.linkedin.datahub.graphql.generated.MLModel;
+import com.linkedin.datahub.graphql.generated.MLExperiment;
 import com.linkedin.datahub.graphql.generated.MLModelGroup;
 import com.linkedin.datahub.graphql.generated.MLFeatureTable;
 import com.linkedin.datahub.graphql.generated.MLFeatureTableProperties;
@@ -102,6 +104,7 @@ import com.linkedin.datahub.graphql.types.mlmodel.MLFeatureType;
 import com.linkedin.datahub.graphql.types.mlmodel.MLPrimaryKeyType;
 import com.linkedin.datahub.graphql.types.tag.TagType;
 import com.linkedin.datahub.graphql.types.mlmodel.MLModelType;
+import com.linkedin.datahub.graphql.types.mlmodel.MLExperimentType;
 import com.linkedin.datahub.graphql.types.mlmodel.MLModelGroupType;
 import com.linkedin.datahub.graphql.types.dataflow.DataFlowType;
 import com.linkedin.datahub.graphql.types.datajob.DataJobType;
@@ -161,6 +164,7 @@ public class GmsGraphQLEngine {
     private final DataPlatformType dataPlatformType;
     private final TagType tagType;
     private final MLModelType mlModelType;
+    private final MLExperimentType mlExperimentType;
     private final MLModelGroupType mlModelGroupType;
     private final MLFeatureType mlFeatureType;
     private final MLFeatureTableType mlFeatureTableType;
@@ -238,6 +242,7 @@ public class GmsGraphQLEngine {
         this.dataPlatformType = new DataPlatformType(entityClient);
         this.tagType = new TagType(entityClient);
         this.mlModelType = new MLModelType(entityClient);
+        this.mlExperimentType = new MLExperimentType(entityClient);
         this.mlModelGroupType = new MLModelGroupType(entityClient);
         this.mlFeatureType = new MLFeatureType(entityClient);
         this.mlFeatureTableType = new MLFeatureTableType(entityClient);
@@ -250,7 +255,7 @@ public class GmsGraphQLEngine {
 
         // Init Lists
         this.entityTypes = ImmutableList.of(datasetType, corpUserType, corpGroupType,
-            dataPlatformType, chartType, dashboardType, tagType, mlModelType, mlModelGroupType, mlFeatureType,
+            dataPlatformType, chartType, dashboardType, tagType, mlModelType, mlModelGroupType, mlFeatureType, mlExperimentType,
             mlFeatureTableType, mlPrimaryKeyType, dataFlowType, dataJobType, glossaryTermType
         );
         this.loadableTypes = new ArrayList<>(entityTypes);
@@ -450,6 +455,9 @@ public class GmsGraphQLEngine {
                             (env) -> env.getArgument(URN_FIELD_NAME))))
             .dataFetcher("mlModel", new AuthenticatedResolver<>(
                     new LoadableTypeResolver<>(mlModelType,
+                            (env) -> env.getArgument(URN_FIELD_NAME))))
+            .dataFetcher("mlExperiment", new AuthenticatedResolver<>(
+                new LoadableTypeResolver<>(mlExperimentType,
                             (env) -> env.getArgument(URN_FIELD_NAME))))
             .dataFetcher("mlModelGroup", new AuthenticatedResolver<>(
                     new LoadableTypeResolver<>(mlModelGroupType,

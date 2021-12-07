@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 
 import com.linkedin.common.urn.MLFeatureUrn;
 import com.linkedin.common.urn.MLModelUrn;
+import com.linkedin.common.urn.MLExperimentUrn;
 import com.linkedin.common.urn.Urn;
 
 public class MLModelUtils {
@@ -33,6 +34,14 @@ public class MLModelUtils {
             throw new RuntimeException(String.format("Failed to retrieve mlFeature with urn %s, invalid urn", modelUrn));
         }
     }
+
+    static MLExperimentUrn getMLExperimentUrn(String modelUrn) {
+        try {
+            return MLExperimentUrn.createFromString(modelUrn);
+        } catch (URISyntaxException uriSyntaxException) {
+            throw new RuntimeException(String.format("Failed to retrieve mlFeature with urn %s, invalid urn", modelUrn));
+        }
+    }    
 
     static Urn getUrn(String modelUrn) {
         try {

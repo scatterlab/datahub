@@ -24,6 +24,7 @@ public class EntityTypeMapper {
           .put(EntityType.DATA_JOB, "dataJob")
           .put(EntityType.GLOSSARY_TERM, "glossaryTerm")
           .put(EntityType.MLMODEL, "mlModel")
+          .put(EntityType.MLEXPERIMENT, "mlExperiment")
           .put(EntityType.MLMODEL_GROUP, "mlModelGroup")
           .put(EntityType.MLFEATURE_TABLE, "mlFeatureTable")
           .put(EntityType.MLFEATURE, "mlFeature")
