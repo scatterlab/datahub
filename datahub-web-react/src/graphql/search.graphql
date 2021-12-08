@@ -249,6 +249,20 @@ fragment searchResults on SearchResults {
                     }
                 }
             }
+            ... on MLExperiment {
+                name
+                description
+                origin
+                ownership {
+                    ...ownershipFields
+                }
+                platform {
+                    name
+                    info {
+                        logoUrl
+                    }
+                }
+            }
             ... on MLModelGroup {
                 name
                 origin

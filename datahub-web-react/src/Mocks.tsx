@@ -19,6 +19,7 @@ import {
     EntityType,
     PlatformType,
     MlModel,
+    MlExperiment,
     MlModelGroup,
     SchemaFieldDataType,
     ScenarioType,
@@ -27,6 +28,7 @@ import {
 } from './types.generated';
 import { GetTagDocument } from './graphql/tag.generated';
 import { GetMlModelDocument } from './graphql/mlModel.generated';
+import { GetMlExperimentDocument } from './graphql/mlExperiment.generated';
 import { GetMlModelGroupDocument } from './graphql/mlModelGroup.generated';
 import { GetGlossaryTermDocument, GetGlossaryTermQuery } from './graphql/glossaryTerm.generated';
 import { GetEntityCountsDocument } from './graphql/app.generated';
@@ -1097,6 +1099,73 @@ export const mlModel = {
     outgoing: null,
 } as MlModel;
 
+export const mlExperiment = {
+    __typename: 'MLExperiment',
+    urn: 'urn:li:mlExperiment:(urn:li:dataPlatform:sagemaker,trustmodel,PROD)',
+    type: EntityType.Mlexperiment,
+    name: 'trust model',
+    description: 'a ml trust model',
+    origin: 'PROD',
+    platform: {
+        urn: 'urn:li:dataPlatform:kafka',
+        name: 'Kafka',
+        info: {
+            type: PlatformType.MessageBroker,
+            datasetNameDelimiter: '.',
+            logoUrl: '',
+        },
+        type: EntityType.DataPlatform,
+    },
+    tags: [],
+    properties: {
+        description: 'a ml trust model',
+        date: null,
+        version: '1',
+        type: 'model type',
+        trainingMetrics: null,
+        hyperParams: null,
+        mlFeatures: null,
+        groups: null,
+        customProperties: null,
+    },
+    ownership: {
+        __typename: 'Ownership',
+        owners: [
+            {
+                owner: {
+                    ...user1,
+                },
+                type: 'DATAOWNER',
+            },
+            {
+                owner: {
+                    ...user2,
+                },
+                type: 'DELEGATE',
+            },
+        ],
+        lastModified: {
+            time: 0,
+        },
+    },
+    upstreamLineage: [],
+    downstreamLineage: [],
+    globalTags: {
+        tags: [
+            {
+                tag: {
+                    type: EntityType.Tag,
+                    urn: 'urn:li:tag:abc-sample-tag',
+                    name: 'abc-sample-tag',
+                    description: 'sample tag',
+                },
+            },
+        ],
+    },
+    incoming: null,
+    outgoing: null,
+} as MlExperiment;
+
 export const mlModelGroup = {
     __typename: 'MLModelGroup',
     urn: 'urn:li:mlModelGroup:(urn:li:dataPlatform:sagemaker,another-group,PROD)',
@@ -2077,6 +2146,21 @@ export const mocks = [
     },
     {
         request: {
+            query: GetMlExperimentDocument,
+            variables: {
+                urn: 'urn:li:mlExperiment:(urn:li:dataPlatform:mlflow,trustexperiment,PROD)',
+            },
+        },
+        result: {
+            data: {
+                mlExperiment: {
+                    ...mlExperiment,
+                },
+            },
+        },
+    },
+    {
+        request: {
             query: GetMlModelGroupDocument,
             variables: {
                 urn: mlModelGroup.urn,
@@ -2733,6 +2817,7 @@ export const mocks = [
                         EntityType.GlossaryTerm,
                         EntityType.MlfeatureTable,
                         EntityType.Mlmodel,
+                        EntityType.Mlexperiment,
                         EntityType.MlmodelGroup,
                     ],
                 },

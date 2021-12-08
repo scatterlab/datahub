@@ -173,6 +173,23 @@ query getBrowseResults($input: BrowseInput!) {
                     }
                 }
             }
+            ... on MLExperiment {
+                name
+                origin
+                description
+                ownership {
+                    ...ownershipFields
+                }
+                globalTags {
+                    ...globalTagsFields
+                }
+                platform {
+                    name
+                    info {
+                        logoUrl
+                    }
+                }
+            }
             ... on MLModelGroup {
                 name
                 origin

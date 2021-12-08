@@ -109,6 +109,24 @@ fragment relationshipFields on Entity {
         }
         ...mlModelRelationshipsLeaf
     }
+    ... on MLExperiment {
+        urn
+        type
+        name
+        description
+        origin
+        platform {
+            name
+            info {
+                displayName
+                logoUrl
+            }
+        }
+        ownership {
+            ...ownershipFields
+        }
+        ...mlExperimentRelationshipsLeaf
+    }
 }
 
 fragment fullRelationshipResults on EntityRelationshipsResult {
@@ -180,6 +198,29 @@ fragment dashboardRelationshipsLeaf on Dashboard {
 }
 
 fragment mlModelRelationshipsLeaf on MLModel {
+    incoming: relationships(
+        input: {
+            types: ["DownstreamOf", "Consumes", "Produces", "TrainedBy", "MemberOf"]
+            direction: INCOMING
+            start: 0
+            count: 100
+        }
+    ) {
+        ...leafRelationshipResults
+    }
+    outgoing: relationships(
+        input: {
+            types: ["DownstreamOf", "Consumes", "Produces", "TrainedBy", "MemberOf"]
+            direction: OUTGOING
+            start: 0
+            count: 100
+        }
+    ) {
+        ...leafRelationshipResults
+    }
+}
+
+fragment mlExperimentRelationshipsLeaf on MLExperiment {
     incoming: relationships(
         input: {
             types: ["DownstreamOf", "Consumes", "Produces", "TrainedBy", "MemberOf"]

@@ -8,6 +8,7 @@ import {
     MlPrimaryKey,
     MlFeature,
     MlModel,
+    MlExperiment,
     MlModelGroup,
 } from '../../types.generated';
 
@@ -113,6 +114,10 @@ export type EntityAndType =
           type: EntityType.Mlmodel;
           entity: MlModel;
       }
+    | {
+        type: EntityType.Mlexperiment;
+        entity: MlExperiment;
+    }
     | {
           type: EntityType.MlmodelGroup;
           entity: MlModelGroup;

@@ -9,6 +9,7 @@ import { useGetMlPrimaryKeyQuery } from '../../../graphql/mlPrimaryKey.generated
 import { EntityType } from '../../../types.generated';
 import { EntityAndType } from '../types';
 import { useGetMlModelQuery } from '../../../graphql/mlModel.generated';
+import { useGetMlExperimentQuery } from '../../../graphql/mlExperiment.generated'
 import { useGetMlModelGroupQuery } from '../../../graphql/mlModelGroup.generated';
 
 export default function useGetEntityQuery(urn: string, entityType?: EntityType) {
@@ -44,6 +45,10 @@ export default function useGetEntityQuery(urn: string, entityType?: EntityType) 
         [EntityType.Mlmodel]: useGetMlModelQuery({
             variables: { urn },
             skip: entityType !== EntityType.Mlmodel,
+        }),
+        [EntityType.Mlexperiment]: useGetMlExperimentQuery({
+            variables: { urn },
+            skip: entityType !== EntityType.Mlexperiment,
         }),
         [EntityType.MlmodelGroup]: useGetMlModelGroupQuery({
             variables: { urn },
@@ -126,6 +131,15 @@ export default function useGetEntityQuery(urn: string, entityType?: EntityType) 
                     } as EntityAndType;
                 }
                 break;
+            case EntityType.Mlexperiment:
+                    returnData = allResults[EntityType.Mlexperiment]?.data?.mlExperiment;
+                    if (returnData) {
+                        return {
+                            entity: returnData,
+                            type: EntityType.Mlexperiment,
+                        } as EntityAndType;
+                    }
+                    break;
             case EntityType.MlmodelGroup:
                 returnData = allResults[EntityType.MlmodelGroup]?.data?.mlModelGroup;
                 if (returnData) {
@@ -155,6 +169,8 @@ export default function useGetEntityQuery(urn: string, entityType?: EntityType) 
         allResults[EntityType.MlfeatureTable],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         allResults[EntityType.Mlmodel],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        allResults[EntityType.Mlexperiment],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         allResults[EntityType.MlmodelGroup],
     ]);
@@ -190,6 +206,8 @@ export default function useGetEntityQuery(urn: string, entityType?: EntityType) 
         allResults[EntityType.MlfeatureTable],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         allResults[EntityType.Mlmodel],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        allResults[EntityType.Mlexperiment],
         // eslint-disable-next-line react-hooks/exhaustive-deps
         allResults[EntityType.MlmodelGroup],
     ]);
