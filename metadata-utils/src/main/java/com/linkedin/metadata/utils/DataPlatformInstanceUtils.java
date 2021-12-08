@@ -15,6 +15,7 @@ import com.linkedin.metadata.key.MLFeatureTableKey;
 import com.linkedin.metadata.key.MLModelDeploymentKey;
 import com.linkedin.metadata.key.MLModelGroupKey;
 import com.linkedin.metadata.key.MLModelKey;
+import com.linkedin.metadata.key.MLExperimentKey;
 import java.net.URISyntaxException;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,8 @@ public class DataPlatformInstanceUtils {
         return getPlatformUrn(((DataProcessKey) keyAspect).getOrchestrator());
       case "mlModel":
         return ((MLModelKey) keyAspect).getPlatform();
+      case "mlExperiment":
+        return ((MLExperimentKey) keyAspect).getPlatform();
       case "mlFeatureTable":
         return ((MLFeatureTableKey) keyAspect).getPlatform();
       case "mlModelDeployment":

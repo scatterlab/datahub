@@ -12,6 +12,7 @@ import com.linkedin.common.urn.DataProcessUrn;
 import com.linkedin.common.urn.DatasetUrn;
 import com.linkedin.common.urn.MLModelUrn;
 import com.linkedin.common.urn.TagUrn;
+import com.linkedin.common.urn.MLExperimentUrn;
 
 import javax.annotation.Nonnull;
 
@@ -61,6 +62,11 @@ public final class Urns {
   @Nonnull
   public static MLModelUrn makeMLModelUrn(@Nonnull String name) {
     return new MLModelUrn(new DataPlatformUrn("mysql"), name, FabricType.DEV);
+  }
+
+  @Nonnull
+  public static MLExperimentUrn makeMLExperimentUrn(@Nonnull String name) {
+    return new MLExperimentUrn(new DataPlatformUrn("mlflow"), name, FabricType.DEV);
   }
 
   @Nonnull
