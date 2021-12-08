@@ -844,6 +844,15 @@ public class GmsGraphQLEngine {
                                 (env) -> ((MLModel) env.getSource()).getPlatform().getUrn()))
                 )
             )
+            .type("MLExperiment", typeWiring -> typeWiring
+                .dataFetcher("relationships", new AuthenticatedResolver<>(
+                    new EntityRelationshipsResultResolver(graphClient)
+                ))
+                .dataFetcher("platform", new AuthenticatedResolver<>(
+                        new LoadableTypeResolver<>(dataPlatformType,
+                                (env) -> ((MLExperiment) env.getSource()).getPlatform().getUrn()))
+                )
+            )
             .type("MLModelProperties", typeWiring -> typeWiring
                 .dataFetcher("groups", new AuthenticatedResolver<>(
                     new LoadableTypeBatchResolver<>(mlModelGroupType,
