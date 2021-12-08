@@ -571,6 +571,51 @@ fragment nonRecursiveMLModel on MLModel {
     }
 }
 
+fragment nonRecursiveMLExperiment on MLExperiment {
+    urn
+    type
+    name
+    description
+    origin
+    platform {
+        name
+        info {
+            logoUrl
+        }
+    }
+    ownership {
+        ...ownershipFields
+    }
+    properties {
+        description
+        date
+        version
+        type
+        metrics {
+            name
+            description
+            value
+        }
+        hyperParams {
+            name
+            description
+            value
+        }
+        groups {
+            urn
+            name
+            description
+        }
+        customProperties {
+            key
+            value
+        }
+    }
+    globalTags {
+        ...globalTagsFields
+    }
+}
+
 fragment nonRecursiveMLModelGroupFields on MLModelGroup {
     urn
     type

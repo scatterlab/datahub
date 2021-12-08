@@ -229,6 +229,21 @@ fragment entityPreview on Entity {
             }
         }
     }
+    ... on MLExperiment {
+        name
+        description
+        origin
+        ownership {
+            ...ownershipFields
+        }
+        platform {
+            name
+            info {
+                displayName
+                logoUrl
+            }
+        }
+    }
     ... on MLModelGroup {
         name
         origin

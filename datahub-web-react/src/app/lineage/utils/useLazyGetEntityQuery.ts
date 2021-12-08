@@ -9,6 +9,7 @@ import { useGetMlPrimaryKeyLazyQuery } from '../../../graphql/mlPrimaryKey.gener
 import { EntityType } from '../../../types.generated';
 import { EntityAndType } from '../types';
 import { useGetMlModelLazyQuery } from '../../../graphql/mlModel.generated';
+import { useGetMlExperimentLazyQuery } from '../../../graphql/mlExperiment.generated';
 import { useGetMlModelGroupLazyQuery } from '../../../graphql/mlModelGroup.generated';
 
 export default function useLazyGetEntityQuery() {
@@ -21,6 +22,7 @@ export default function useLazyGetEntityQuery() {
     const [getAsyncMLFeature, { data: asyncMLFeature }] = useGetMlFeatureLazyQuery();
     const [getAsyncMLPrimaryKey, { data: asyncMLPrimaryKey }] = useGetMlPrimaryKeyLazyQuery();
     const [getAsyncMlModel, { data: asyncMlModel }] = useGetMlModelLazyQuery();
+    const [getAsyncMlExperiment, { data: asyncMlExperiment }] = useGetMlExperimentLazyQuery();
     const [getAsyncMlModelGroup, { data: asyncMlModelGroup }] = useGetMlModelGroupLazyQuery();
 
     const getAsyncEntity = useCallback(
@@ -57,6 +59,10 @@ export default function useLazyGetEntityQuery() {
                 setFetchedEntityType(type);
                 getAsyncMlModel({ variables: { urn } });
             }
+            if (type === EntityType.Mlexperiment) {
+                setFetchedEntityType(type);
+                getAsyncMlExperiment({ variables: { urn } });
+            }
             if (type === EntityType.MlmodelGroup) {
                 setFetchedEntityType(type);
                 getAsyncMlModelGroup({ variables: { urn } });
@@ -72,6 +78,7 @@ export default function useLazyGetEntityQuery() {
             getAsyncMLFeature,
             getAsyncMLPrimaryKey,
             getAsyncMlModel,
+            getAsyncMlExperiment,
             getAsyncMlModelGroup,
         ],
     );
@@ -151,6 +158,15 @@ export default function useLazyGetEntityQuery() {
                     } as EntityAndType;
                 }
                 break;
+            case EntityType.Mlexperiment:
+                    returnData = asyncMlExperiment?.mlExperiment;
+                    if (returnData) {
+                        return {
+                            entity: returnData,
+                            type: EntityType.Mlexperiment,
+                        } as EntityAndType;
+                    }
+                    break;
             case EntityType.MlmodelGroup:
                 returnData = asyncMlModelGroup?.mlModelGroup;
                 if (returnData) {
@@ -174,6 +190,7 @@ export default function useLazyGetEntityQuery() {
         asyncMLFeature,
         asyncMLPrimaryKey,
         asyncMlModel,
+        asyncMlExperiment,
         asyncMlModelGroup,
     ]);
 

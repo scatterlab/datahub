@@ -9,7 +9,7 @@ RUN addgroup -S datahub && adduser -S datahub -G datahub
 RUN apk --no-cache --update-cache --available upgrade \
     && apk --no-cache add curl openjdk8-jre
 
-FROM --platform=$BUILDPLATFORM node:16.13.0-alpine3.14 AS prod-build
+FROM node:16.13.0-alpine3.14 AS prod-build
 
 # Upgrade Alpine and base packages
 RUN apk --no-cache --update-cache --available upgrade \
@@ -20,7 +20,7 @@ ARG USE_SYSTEM_NODE="true"
 ENV CI=true
 ENV GRADLE_OPTS="-Xms256m -Xmx512m"
 COPY . datahub-src
-RUN cd datahub-src && ./gradlew :datahub-frontend:dist -PenableEmber=${ENABLE_EMBER} -PuseSystemNode=${USE_SYSTEM_NODE} -x test -x yarnTest -x yarnLint \
+RUN cd datahub-src && ./gradlew :datahub-frontend:dist -PenableEmber=${ENABLE_EMBER} -PuseSystemNode=${USE_SYSTEM_NODE} -x test -x yarnTest -x yarnLint -Prest.model.compatibility=ignore \
     && cp datahub-frontend/build/distributions/datahub-frontend.zip ../datahub-frontend.zip \
     && cd .. && rm -rf datahub-src && unzip datahub-frontend.zip
 
