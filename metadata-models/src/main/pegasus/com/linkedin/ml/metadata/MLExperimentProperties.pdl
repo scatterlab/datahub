@@ -42,13 +42,6 @@ record MLExperimentProperties includes CustomProperties, ExternalReference {
   type: optional string
 
   /**
-   * Hyper Parameters of the MLModel
-   * 
-   * NOTE: these are deprecated in favor of hyperParams
-   */
-  hyperParameters: optional map[string, HyperParameterValueType]
-
-  /**
    * Hyperparameters of the MLModel
    */
   hyperParams: optional array[MLHyperParam]
@@ -64,13 +57,13 @@ record MLExperimentProperties includes CustomProperties, ExternalReference {
   tags: array[string] = [ ]
 
   /**
-   * List of jobs (if any) that use the model
+   * List of dataset (if any) that use in experiment
    */
   @Relationship = {
     "/*": {
-      "name": "UsedBy",
-      "entityTypes": [ "dataJob" ]
+      "name": "Consumes",
+      "entityTypes": [ "dataset" ]
     }
   }
-  downstreamJobs: optional array[Urn]
+  trainingDatasets: optional array[Urn]
 }

@@ -9,7 +9,7 @@ import { useGetMlPrimaryKeyQuery } from '../../../graphql/mlPrimaryKey.generated
 import { EntityType } from '../../../types.generated';
 import { EntityAndType } from '../types';
 import { useGetMlModelQuery } from '../../../graphql/mlModel.generated';
-import { useGetMlExperimentQuery } from '../../../graphql/mlExperiment.generated'
+import { useGetMlExperimentQuery } from '../../../graphql/mlExperiment.generated';
 import { useGetMlModelGroupQuery } from '../../../graphql/mlModelGroup.generated';
 
 export default function useGetEntityQuery(urn: string, entityType?: EntityType) {
@@ -132,14 +132,14 @@ export default function useGetEntityQuery(urn: string, entityType?: EntityType) 
                 }
                 break;
             case EntityType.Mlexperiment:
-                    returnData = allResults[EntityType.Mlexperiment]?.data?.mlExperiment;
-                    if (returnData) {
-                        return {
-                            entity: returnData,
-                            type: EntityType.Mlexperiment,
-                        } as EntityAndType;
-                    }
-                    break;
+                returnData = allResults[EntityType.Mlexperiment]?.data?.mlExperiment;
+                if (returnData) {
+                    return {
+                        entity: returnData,
+                        type: EntityType.Mlexperiment,
+                    } as EntityAndType;
+                }
+                break;
             case EntityType.MlmodelGroup:
                 returnData = allResults[EntityType.MlmodelGroup]?.data?.mlModelGroup;
                 if (returnData) {

@@ -601,11 +601,6 @@ fragment nonRecursiveMLExperiment on MLExperiment {
             description
             value
         }
-        groups {
-            urn
-            name
-            description
-        }
         customProperties {
             key
             value

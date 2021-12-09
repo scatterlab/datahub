@@ -117,4 +117,15 @@ record MLModelProperties includes CustomProperties, ExternalReference {
     }
   }
   groups: optional array[Urn]
+
+  /**
+   * List of Experiment
+   */
+  @Relationship = {
+    "/*": {
+      "name": "TrainedBy",
+      "entityTypes": [ "mlExperiment" ]
+    }
+  }
+  trainingExperiments: optional array[Urn]
 }

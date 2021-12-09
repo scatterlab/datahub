@@ -11,7 +11,9 @@ describe('MlExperimentProfile', () => {
         const { getByText, queryAllByText } = render(
             <MockedProvider mocks={mocks} addTypename={false}>
                 <TestPageContainer
-                    initialEntries={['/mlExperiment/urn:li:mlExperiment:(urn:li:dataPlatform:sagemaker,trustmodel,PROD)']}
+                    initialEntries={[
+                        '/mlExperiment/urn:li:mlExperiment:(urn:li:dataPlatform:sagemaker,trustmodel,PROD)',
+                    ]}
                 >
                     <MLExperimentProfile urn="urn:li:mlExperiment:(urn:li:dataPlatform:sagemaker,trustmodel,PROD)" />
                 </TestPageContainer>
