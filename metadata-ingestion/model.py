@@ -17,6 +17,7 @@ experiment = MLModelPropertiesClass(
     description="WASANS",
     date=123456,
     version=VersionTagClass("VERSION_TAG"),
+    trainingExperiments=["urn:li:mlExperiment:(urn:li:dataPlatform:mlflow,testexp,PROD)"]
 )
 
 snapshot = MLModelSnapshotClass(urn, [experiment])

@@ -21,7 +21,9 @@ export const Preview = ({ model }: { model: MlExperiment }): JSX.Element => {
             description={model.description || ''}
             type={entityRegistry.getEntityName(EntityType.Mlexperiment)}
             logoComponent={
-                <LogoContainer>{entityRegistry.getIcon(EntityType.Mlexperiment, 20, IconStyleType.HIGHLIGHT)}</LogoContainer>
+                <LogoContainer>
+                    {entityRegistry.getIcon(EntityType.Mlexperiment, 20, IconStyleType.HIGHLIGHT)}
+                </LogoContainer>
             }
             platform={capitalPlatformName}
             qualifier={model.origin}

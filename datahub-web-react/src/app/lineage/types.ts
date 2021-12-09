@@ -115,9 +115,9 @@ export type EntityAndType =
           entity: MlModel;
       }
     | {
-        type: EntityType.Mlexperiment;
-        entity: MlExperiment;
-    }
+          type: EntityType.Mlexperiment;
+          entity: MlExperiment;
+      }
     | {
           type: EntityType.MlmodelGroup;
           entity: MlModelGroup;

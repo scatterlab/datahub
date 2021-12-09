@@ -4751,17 +4751,11 @@ type MLExperimentProperties {
 
     type: String
 
-    hyperParameters: HyperParameterMap
-
     hyperParams:  [MLHyperParam]
 
     metrics: [MLMetric]
 
-    mlFeatures: [String!]
-
     tags: [String!]
-
-    groups: [MLModelGroup]
 
     customProperties: [StringMapEntry!]
 }

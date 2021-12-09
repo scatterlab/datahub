@@ -159,14 +159,14 @@ export default function useLazyGetEntityQuery() {
                 }
                 break;
             case EntityType.Mlexperiment:
-                    returnData = asyncMlExperiment?.mlExperiment;
-                    if (returnData) {
-                        return {
-                            entity: returnData,
-                            type: EntityType.Mlexperiment,
-                        } as EntityAndType;
-                    }
-                    break;
+                returnData = asyncMlExperiment?.mlExperiment;
+                if (returnData) {
+                    return {
+                        entity: returnData,
+                        type: EntityType.Mlexperiment,
+                    } as EntityAndType;
+                }
+                break;
             case EntityType.MlmodelGroup:
                 returnData = asyncMlModelGroup?.mlModelGroup;
                 if (returnData) {
