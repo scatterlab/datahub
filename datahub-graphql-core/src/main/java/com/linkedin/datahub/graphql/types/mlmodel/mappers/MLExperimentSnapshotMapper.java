@@ -72,6 +72,9 @@ public class MLExperimentSnapshotMapper implements ModelMapper<MLExperimentSnaps
                 if (experimentProperties.getDescription() != null) {
                     result.setDescription(experimentProperties.getDescription());
                 }
+                if (experimentProperties.hasExternalUrl()) {
+                    result.setExternalUrl(experimentProperties.getExternalUrl());
+                }
             } else if (aspect instanceof GlobalTags) {
                 result.setGlobalTags(GlobalTagsMapper.map((GlobalTags) aspect));
                 result.setTags(GlobalTagsMapper.map((GlobalTags) aspect));

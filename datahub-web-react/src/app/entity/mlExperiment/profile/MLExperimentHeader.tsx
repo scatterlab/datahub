@@ -1,4 +1,4 @@
-import { Image, Row, Space, Typography } from 'antd';
+import { Image, Row, Space, Typography, Button } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import { MlExperiment } from '../../../../types.generated';
@@ -31,6 +31,8 @@ export type Props = {
 export default function MLExperimentHeader({ mlExperiment: { ownership, platform, properties } }: Props) {
     const entityRegistry = useEntityRegistry();
     const isCompact = React.useContext(CompactContext);
+    const externalUrl = properties?.externalUrl || undefined;
+    const hasExternalUrl = !!externalUrl;
 
     return (
         <>
@@ -54,6 +56,7 @@ export default function MLExperimentHeader({ mlExperiment: { ownership, platform
                                 ) : null}
                                 <PlatformName>{platform.name}</PlatformName>
                             </Space>
+                            {hasExternalUrl && <Button href={externalUrl}>View in {platform.name}</Button>}
                         </HeaderInfoItem>
                     ) : null}
                 </Row>
