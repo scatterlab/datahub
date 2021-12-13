@@ -591,6 +591,7 @@ fragment nonRecursiveMLExperiment on MLExperiment {
         date
         version
         type
+        externalUrl
         metrics {
             name
             description

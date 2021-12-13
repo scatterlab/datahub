@@ -4559,6 +4559,8 @@ type MLExperiment implements EntityWithRelationships & Entity {
     Edges extending from this entity
     """
     relationships(input: RelationshipsInput!): EntityRelationshipsResult
+
+    externalUrl: String
 }
 
 """
@@ -4758,6 +4760,8 @@ type MLExperimentProperties {
     tags: [String!]
 
     customProperties: [StringMapEntry!]
+
+    externalUrl: String
 }
 
 type MLFeatureProperties {
