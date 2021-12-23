@@ -1,7 +1,7 @@
 # Defining environment
 ARG APP_ENV=prod
 
-FROM python:3.8 as base
+FROM gcr.io/pingpong-internal/python:3.7 as base
 # ENV DOCKERIZE_VERSION v0.6.1
 # RUN apk --no-cache add curl tar \
 #     && curl https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.4.20.v20190813/jetty-runner-9.4.20.v20190813.jar --output jetty-runner.jar \
@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
         libsasl2-dev \
         libsasl2-modules \
         ldap-utils \
-    && python -m pip install --upgrade pip wheel setuptools==57.5.0
+    && python -m pip install --upgrade pip wheel setuptools==57.5.0 git+ssh://git@github.com/scatterlab/pingpong-datahub-ingestion.git@sunghwan/sshsupport#egg=ingestion \
+    && python -m pip uninstall pingpong-datahub -y
 
 
 FROM openjdk:8 as prod-build
@@ -37,8 +38,5 @@ FROM base as dev-install
 # See this excellent thread https://github.com/docker/cli/issues/1134
 
 FROM ${APP_ENV}-install as final
-
-RUN addgroup --system datahub && adduser --system datahub --ingroup datahub
-USER datahub
 
 ENTRYPOINT [ "datahub" ]
