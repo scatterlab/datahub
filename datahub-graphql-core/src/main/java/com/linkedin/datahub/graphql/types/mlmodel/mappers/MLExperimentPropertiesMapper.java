@@ -40,6 +40,10 @@ public class MLExperimentPropertiesMapper implements ModelMapper<com.linkedin.ml
             ).collect(Collectors.toList()));
         }
 
+        if (mlExperimentProperties.getExternalUrl() != null) {
+            result.setExternalUrl(mlExperimentProperties.getExternalUrl().toString());
+        }
+
         result.setTags(mlExperimentProperties.getTags());
 
         return result;
