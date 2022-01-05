@@ -31,8 +31,6 @@ export type Props = {
 export default function MLExperimentHeader({ mlExperiment: { ownership, platform, properties } }: Props) {
     const entityRegistry = useEntityRegistry();
     const isCompact = React.useContext(CompactContext);
-    const externalUrl = properties?.externalUrl || undefined;
-    const hasExternalUrl = !!externalUrl;
 
     return (
         <>
@@ -47,16 +45,15 @@ export default function MLExperimentHeader({ mlExperiment: { ownership, platform
                             </div>
                             <Space direction="horizontal">
                                 {platform.info?.logoUrl ? (
-                                    <PreviewImage
-                                        preview={false}
-                                        src={platform.info?.logoUrl}
-                                        placeholder
-                                        alt={platform.name}
-                                    />
+                                    <PreviewImage preview={false} src={platform.info?.logoUrl} alt={platform.name} />
                                 ) : null}
                                 <PlatformName>{platform.name}</PlatformName>
                             </Space>
-                            {hasExternalUrl && <Button href={externalUrl}>View in {platform.name}</Button>}
+                            <div>
+                                {properties?.externalUrl ? (
+                                    <Button href={properties?.externalUrl}>View in {platform.name}</Button>
+                                ) : null}
+                            </div>
                         </HeaderInfoItem>
                     ) : null}
                 </Row>

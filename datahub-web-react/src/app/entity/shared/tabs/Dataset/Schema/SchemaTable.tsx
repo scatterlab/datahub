@@ -53,7 +53,10 @@ export default function SchemaTable({
 
     const [tagHoveredIndex, setTagHoveredIndex] = useState<string | undefined>(undefined);
     const [selectedFkFieldPath, setSelectedFkFieldPath] =
-        useState<null | { fieldPath: string; constraint?: ForeignKeyConstraint | null }>(null);
+        useState<null | {
+            fieldPath: string;
+            constraint?: ForeignKeyConstraint | null;
+        }>(null);
 
     const descriptionRender = useDescriptionRenderer(editableSchemaMetadata);
     const usageStatsRenderer = useUsageStatsRenderer(usageStats);
