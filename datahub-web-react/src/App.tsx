@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, ServerError } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { ThemeProvider } from 'styled-components';
-
 import './App.less';
 import { Routes } from './app/Routes';
 import EntityRegistry from './app/entity/EntityRegistry';
@@ -30,6 +29,8 @@ import { MLFeatureTableEntity } from './app/entity/mlFeatureTable/MLFeatureTable
 import { MLModelEntity } from './app/entity/mlModel/MLModelEntity';
 import { MLExperimentEntity } from './app/entity/mlExperiment/MLExperimentEntity';
 import { MLModelGroupEntity } from './app/entity/mlModelGroup/MLModelGroupEntity';
+import { DomainEntity } from './app/entity/domain/DomainEntity';
+import { ContainerEntity } from './app/entity/container/ContainerEntity';
 
 /*
     Construct Apollo Client
@@ -96,6 +97,8 @@ const App: React.VFC = () => {
         register.register(new MLModelEntity());
         register.register(new MLExperimentEntity());
         register.register(new MLModelGroupEntity());
+        register.register(new DomainEntity());
+        register.register(new ContainerEntity());
         return register;
     }, []);
 
