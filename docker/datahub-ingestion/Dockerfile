@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
         libsasl2-dev \
         libsasl2-modules \
         ldap-utils \
-    && python -m pip install --upgrade pip wheel setuptools==57.5.0 git+ssh://git@github.com/scatterlab/pingpong-datahub-ingestion.git@sunghwan/sshsupport#egg=ingestion \
+    && python -m pip install --upgrade pip wheel setuptools==57.5.0 git+ssh://git@github.com/scatterlab/pingpong-datahub-ingestion.git \
     && python -m pip uninstall pingpong-datahub -y
 
 
